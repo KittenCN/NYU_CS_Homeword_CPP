@@ -1,27 +1,33 @@
 #include<iostream>
 #include<iomanip>
+#include<algorithm>
 using namespace std;
-int main(){
-    int n;
-    while(cin>>n){
-        if(n==0) {break;}
-        if(n<=4) {cout<<10<<endl; continue;}
-        double ans=n/8*18; n%=8;
-        if(n!=0){
-            if(n<=4){
-                ans+=n*2.4;
-                if((int)ans-ans==0) {printf("%d\n",ans);}
-                else{printf("%.1f\n",ans);}
-                continue;
-            }
-            else{
-                cout<<ans+10+(n-4)*2<<endl;
-                continue;
-            }
-        }
-        if((int)ans-ans==0) {printf("%d\n",ans);}
-                else{printf("%.1f\n",ans);}
+int n, l[105], ans[105], v[105];
+void dfs(int dep){
+    if(dep == n){
+        for(int i = 0; i < n; i++)
+            cout << ans[i] << " ";
+        cout << endl;
+        return;
     }
+    for (int i = 0; i < n; i++){
+        if(v[i]) continue;
+        ans[dep] = l[i];
+        v[i] = 1;
+        dfs(dep + 1);
+        v[i] = 0;
+    }
+        return;
+}
+int main(){
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        cin >> l[i];
+    }
+    sort(l, l + n);
+    memset(ans, 0, sizeof(ans));
+    memset(v, 0, sizeof(v));
+    dfs(0);
     system("pause");
     return 0;
 }
