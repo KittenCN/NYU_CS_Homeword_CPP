@@ -1,33 +1,27 @@
 #include<iostream>
 #include<iomanip>
 #include<algorithm>
+struct node
+{
+    int l;
+    int m;
+};
+node tt[105];
 using namespace std;
-int n, l[105], ans[105], v[105];
-void dfs(int dep){
-    if(dep == n){
-        for(int i = 0; i < n; i++)
-            cout << ans[i] << " ";
-        cout << endl;
-        return;
-    }
-    for (int i = 0; i < n; i++){
-        if(v[i]) continue;
-        ans[dep] = l[i];
-        v[i] = 1;
-        dfs(dep + 1);
-        v[i] = 0;
-    }
-        return;
+bool cmp(node a,node b)
+{
+    return a.l < b.l && a.m < b.m;
 }
 int main(){
+    int n;
     cin >> n;
     for(int i = 0; i < n; i++){
-        cin >> l[i];
+        cin >> tt[i].l >> tt[i].m;
     }
-    sort(l, l + n);
-    memset(ans, 0, sizeof(ans));
-    memset(v, 0, sizeof(v));
-    dfs(0);
+    sort(tt, tt + n, cmp);
+    for(int i = 0; i < n; i++){
+        cout << tt[i].l << " " << tt[i].m << endl;
+    }
     system("pause");
     return 0;
 }
