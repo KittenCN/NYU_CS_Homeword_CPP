@@ -122,6 +122,6 @@ inline void AC()
 int main()
 {
     AC();
-    system("pause");
+    // system("pause");
     return 0;
 }
